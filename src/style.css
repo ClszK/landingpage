@@ -19,15 +19,18 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
+  align-self: center;
   justify-content: center;
   aspect-ratio: 1;
-  margin: 3em;
+  margin: 1em;
   opacity: 0.8;
   z-index: 2;
 }
 
 .bottom-copy-line {
   z-index: 3;
+  font-size: 1em;
+  padding-bottom: 0.5em;
   color: black;
 }
 
@@ -135,8 +138,8 @@ body{
     -webkit-transform: translate(0) scale(1);
   }
   100% {
-    transform: translate(-100%, -30%) scale(0.7);
-    -webkit-transform: translate(-100%, -30%) scale(0.7);
+    transform: translate(-80%, -30%) scale(0.7);
+    -webkit-transform: translate(-80%, -30%) scale(0.7);
   }
 }
 
@@ -146,8 +149,8 @@ body{
     -webkit-transform: translate(0) scale(1);
   }
   100% {
-    transform: translate(-100%, -30%) scale(0.7);
-    -webkit-transform: translate(-100%, -30%) scale(0.7);
+    transform: translate(-80%, -30%) scale(0.7);
+    -webkit-transform: translate(-80%, -30%) scale(0.7);
   }
 }
 .katalk-topbar {
@@ -204,20 +207,45 @@ body{
 }
 
 .bubble.focused {
-  border: solid 2px orange;
+  outline: solid 1px #614BC3;
+  animation: border_width 1s ease forwards infinite;
 }
 
+@keyframes border_width {
+  0% {
+    outline-width: 1px;
+  }
+  50% {
+    outline-width: 4px;
+  }
+  100% {
+    outline-width: 1px;
+  }
+}
+
+@-webkit-keyframes borer_width {
+  0% {
+    outline-width: 1px;
+  }
+  50% {
+    outline-width: 4px;
+  }
+  100% {
+    outline-width: 1px;
+  }
+}
 .feedback {
   width: 80vw;
   max-width: 600px;
-  height: 40vh;
   max-height: 500px;
+  min-height: 300px;
   background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: absolute;
   padding-top: 2em;
+  padding-bottm: 2em;
   margin-top: 20%;
   margin-left: 10%;
   z-index: 3;
@@ -264,17 +292,19 @@ body{
 }
 
 .bubble.otherchat::before{
-  content: "◀";
-  scale: 1.5;
-  color: #ffffff;
+  content:"\A";
+  border-style: solid;
+  border-width: 10px 15px 10px 0;
+  border-color: transparent #FFFFFF transparent transparent;
   position: relative;
   right: 1.5em;
 }
 
 .bubble.userchat::after {
-  content: "▶";
-  scale: 1.5;
-  color: #F9EB54;
+  content:"\A";
+  border-style: solid;
+  border-width: 10px 0px 10px 15px;
+  border-color: transparent transparent transparent #F9EB54;
   position: relative;
   left: 1.5em;
 }
@@ -283,7 +313,6 @@ body{
   height: 5em;
   margin-top: 1em;
   margin-bottom: 1em;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -291,7 +320,7 @@ body{
 }
 
 .request-button {
-  min-width: 300px;
+  min-width: 200px;
   min-height: 3em;
   margin-bottom: 1em;
   font-family: 'Nunito', sans-serif;
@@ -310,12 +339,13 @@ body{
   outline: none;
   position: relative;
   padding: 10px;
+  z-index: 3;
 }
 
 .request-button::before {
   content: '';
   border-radius: 1000px;
-  min-width: calc(300px + 12px);
+  min-width: calc(200px + 12px);
   min-height: calc(60px + 12px);
   border: 6px solid #00FFCB;
   box-shadow: 0 0 60px rgba(0,255,203,.64);
@@ -645,6 +675,7 @@ article,aside,footer,header,nav,section{
 
 section {
   height: 200vh;
+  min-height: 1700px;
 }
 h1{
   font-size:2em;margin:0.67em 0
@@ -915,8 +946,8 @@ h4,h5,h6,.h4,.h5,.h6{
 }
 p{
   margin-top:0;
-  margin-bottom:0;
-  font-size: 0.7em;  
+  margin-bottom:0.2em;
+  font-size: 0.8em;  
 }
 dfn,cite,em,i{
   font-style:italic
@@ -1492,7 +1523,7 @@ button,input,select,textarea,label{
 
   .bottom-copy {
     position: absolute;
-    right: -100%;
+    right: -90%;
     bottom: 0;
   }
   .feedback {

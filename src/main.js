@@ -241,13 +241,13 @@
   const firstChat = firstScreen.getElementsByClassName("katalk-chat")[0];
   let nextChatIndex = 0;
   let isShowingChat = false;
-  const chatInterval = 500;
+  const chatInterval = 1500;
   let focusedChat = null;
 
 
   window.onscroll = (() => {
     const wasPhonePresenting = isPhonePresenting;
-    isPhonePresenting = this.scrollY > 300 && this.scrollY < 1100;
+    isPhonePresenting = this.scrollY > 200 && this.scrollY < 1500;
     if (!wasPhonePresenting && isPhonePresenting && !isShowingChat) {
       startShowChat(); 
     }
@@ -262,7 +262,7 @@
       if (isShowingChat) {
         showChat(chat[nextChatIndex]);
         if (nextChatIndex == chat.length - 1) {
-          showRequestButton();
+          setTimeout(showRequestButton, 1500);
           stopShowChat();
         }
         nextChatIndex += 1;
