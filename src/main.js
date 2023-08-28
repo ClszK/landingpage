@@ -201,7 +201,7 @@
 
   let isPhonePresenting = false;
 
-  const chat = [
+  const chats = [
     {
       isUser: true,
       message: "프사는 왜 내렸어?"
@@ -229,11 +229,13 @@
     },
     {
       isUser: false,
-      message: "아됐어 그만 얘기해"
+      message: "아됐어 그만 얘기해",
+      feedbackMessage: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lorem erat, blandit eget venenatis in, venenatis a libero. Duis tristique cursus mauris sed varius. Suspendisse urna tellus, eleifend vel posuere "
     },
     {
       isUser: false,
-      message: "나 잘거야"
+      message: "나 잘거야",
+      feedbackMessage: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lorem erat, blandit eget venenatis in, venenatis a libero. Duis tristique cursus mauris sed varius. Suspendisse urna tellus, eleifend vel posuere semper, pulvinar vel dolor. Suspendisse venenatis est sem, at vehicula ipsum vestibulum "
     }
   ]
 
@@ -242,26 +244,41 @@
   let nextChatIndex = 0;
   let isShowingChat = false;
   const chatInterval = 1500;
-  let focusedChat = null;
+  let focusedChatIndex = null;
 
+  function disableScroll() {
+    if (phonePosition == null)
+      return ;
+    window.scrollTo({
+      top: phonePosition, 
+      behavior: "smooth",
+    });
+  }
+
+  let phonePosition = null;
 
   window.onscroll = (() => {
     const wasPhonePresenting = isPhonePresenting;
     isPhonePresenting = this.scrollY > 200 && this.scrollY < 1500;
     if (!wasPhonePresenting && isPhonePresenting && !isShowingChat) {
+      var offsets = document.querySelector(".iphonex").getBoundingClientRect();
+      phonePosition = window.scrollY + offsets.top;
       startShowChat(); 
+    }
+    else if (wasPhonePresenting) {
+      disableScroll();
     }
   })
 
   let intervalId = null;
   const startShowChat = () => {
-    if (nextChatIndex >= chat.length)
+    if (nextChatIndex >= chats.length)
       return ;
     isShowingChat = true;
     intervalId = setInterval(() => {
       if (isShowingChat) {
-        showChat(chat[nextChatIndex]);
-        if (nextChatIndex == chat.length - 1) {
+        showChat(chats[nextChatIndex]);
+        if (nextChatIndex == chats.length - 1) {
           setTimeout(showRequestButton, 1500);
           stopShowChat();
         }
@@ -272,10 +289,12 @@
 
   const stopShowChat = () => {
     isShowingChat = false;
+    isPhonePresenting = false;
     if (intervalId == null)
       return ;
     clearInterval(intervalId);
     intervalId = null;
+    window.onscroll = () => {};
   }
   
   const showChat = (chat) => {
@@ -305,25 +324,48 @@
     const button = document.getElementsByClassName("request-button")[0];
     phone.classList.add("elementToScaleDownLeftTop");
     button.classList.add("elementToFadeOut");
-    const firstChat = chat[chat.length - 3];
-    showFeedbackForChat(firstChat);
+    const firstIndex = chats.findIndex((c) => c.feedbackMessage);
+    showFeedbackForChat(firstIndex);
   }
 
-  const showFeedbackForChat = (chat) => {
-    focusedChat = chat;
+  const showFeedbackForChat = (index) => {
+    const chat = chats[index];
     const bubble = chat.bubble;
-    bubble.scrollIntoView({block: "nearest", inline: "nearest", behavior: "smooth"});
-    bubble.classList.add("focused");
+    const isFirst = focusedChatIndex == null;
+    bubble.scrollIntoView(
+      {block: "nearest", inline: "nearest", behavior: "smooth"});
+    focusedChatIndex = index;
+    if (!isFirst) {
+      const prevFocused = document.querySelector(".focused");
+      prevFocused.classList.remove("focused");
+      const feedback = document.querySelector(".feedback");
+      changeFeedbackContent(feedback, chat);
+    }
     setTimeout(() => {
-      const feedback = createFeedbackView(chat);
-      const {y, height} = bubble.getBoundingClientRect(bubble);
-      const container = document.getElementsByClassName("mockup-container")[0];
-      const id = "currentFocuesd";
-      feedback.id = id;
-      feedback.style.top = (y + height) +"px";
-      container.appendChild(feedback);   
-      presentMessage(chat.feedbackMessage, feedback.getElementsByClassName("feedback-content")[0]);
+      let feedback;
+      if (isFirst) {
+        const requestButton = document.querySelector(".request-button-container");
+        requestButton.style.display = "none";
+        feedback = createFeedbackView(chat);
+        const container = document.getElementsByClassName("mockup-container")[0];
+        container.appendChild(feedback);
+      } else {
+        feedback = document.querySelector(".feedback");
+      }
+      const nextIndex = findNextIndexFrom(index + 1);
+      if (nextIndex == null) {
+        focusedChatIndex = null;
+      }
+      bubble.classList.add("focused");
+      presentMessage(chat.feedbackMessage, feedback.querySelector(".feedback-content"));
     }, 1000)
+  }
+
+  const changeFeedbackContent = (view, chat) => {
+    const chatMessage = view.querySelector(".feedback-chat");
+    chatMessage.innerText = chat.message;
+    const content = view.querySelector(".feedback-content");
+    content.innerText = "";
   }
 
   const createFeedbackView = (chat) => {
@@ -337,10 +379,37 @@
     chatMessage.innerText = `${chat.message}`;
     const content = document.createElement("p");
     content.className = "feedback-content";
+    const nextButton = document.createElement("button");
+    nextButton.className = "next-feedback-button";
+    nextButton.addEventListener("click", () => showNextFeedback());
+    nextButton.innerHTML = `<svg width="180px" height="60px" viewBox="0 0 180 60" class="border">
+          <polyline points="179,1 179,59 1,59 1,1 179,1" class="bg-line" />
+          <polyline points="179,1 179,59 1,59 1,1 179,1" class="hl-line" />
+        </svg>
+        <span>다음 결과 보기</span>`;
+    nextButton.style.display = "none";
     view.appendChild(title); 
     view.appendChild(chatMessage);
     view.appendChild(content);
+    view.appendChild(nextButton);
     return view;
+  }
+
+  const findNextIndexFrom = (index) => {
+    for (let i = index; i < chats.length; ++i) {
+      if (chats[i].feedbackMessage)
+        return i; 
+    }
+    return null;
+  }
+
+  const showNextFeedback = () => {
+    const nextButton = document.querySelector(".next-feedback-button");
+    nextButton.style.display = "none";
+    const nextIndex = findNextIndexFrom(focusedChatIndex + 1);
+    if (nextIndex == null) 
+      return ;
+    showFeedbackForChat(nextIndex);
   }
 
   const presentMessage = (message, view) => {
@@ -354,6 +423,11 @@
       ++i;
       if (i < words.length) {
         setTimeout(timer, Math.random() * 300);
+      }else {
+        if (focusedChatIndex != null) {
+        const nextbutton = document.querySelector(".next-feedback-button");
+          nextbutton.style = "block";
+        }
       }
     }
     setTimeout(timer, 100);
