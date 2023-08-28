@@ -309,7 +309,7 @@
     button.innerHTML = `<button class="request-button">AI로 분석하기</button>`;
     button.addEventListener("click", (e) => showNextScreen());
     firstChat.appendChild(button);
-    button.scrollIntoView({block: "nearest", inline: "nearest", behavior: "smooth"});
+    button.scrollIntoView({block: "nearest", inline: "nearest"});
   }
 
   const showNextScreen = () => {
