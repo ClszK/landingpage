@@ -1,0 +1,16 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Background	src/main.js	/^  Background.prototype.start = function () {$/;"	c
+Background.bubbleDensity	src/main.js	/^  Background.prototype.bubbleDensity = function () {$/;"	m
+Background.generateBubbles	src/main.js	/^  Background.prototype.generateBubbles = function () {$/;"	m
+Bubble	src/main.js	/^  Bubble.prototype.getCanvasSize = function () {$/;"	c
+Bubble.getCanvasSize	src/main.js	/^  Bubble.prototype.getCanvasSize = function () {$/;"	m
+Bubble.update	src/main.js	/^  Bubble.prototype.update = function () {$/;"	m
+connect	server.js	/^ var connect = require('connect');$/;"	v
+function.disableScroll	src/main.js	/^  function disableScroll() {$/;"	f
+revealAnimations	src/main.js	/^  function revealAnimations () {$/;"	f
+serveStatic	server.js	/^ var serveStatic = require('serve-static');$/;"	v

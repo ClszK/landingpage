@@ -8,9 +8,48 @@
   rootEl.classList.remove('no-js')
   rootEl.classList.add('js')
 
+  const chats = [
+    {
+      isUser: true,
+      message: "프사는 왜 내렸어?"
+    },
+    {
+      isUser: true,
+      message: "상태명은 또 뭐야.."
+    },
+    {
+      isUser: true,
+      message: "헤어진 것처럼.."
+    },
+    {
+      isUser: false,
+      message: "없애든 말든 내 맘이지",
+    },
+    {
+      isUser: true,
+      message: "그렇게 꼭 싸운 티를 내야 돼?",
+    },
+    {
+      isUser: false,
+      message: "내 공간인데 내 맘대로 사용하지도 못함?",
+      feedbackMessage: "감정을 표현하는 방식이 다소 공격적이에요. 상대방과의 타협을 찾기가 갈수록 어려워집니다. 상대방에게는 자신의 마음을 고려하지 않고 자기중심적인 태도로 여겨질 수 있어요."
+    },
+    {
+      isUser: false,
+      message: "아됐어 그만 얘기해",
+      feedbackMessage: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lorem erat, blandit eget venenatis in, venenatis a libero. Duis tristique cursus mauris sed varius. Suspendisse urna tellus, eleifend vel posuere "
+    },
+    {
+      isUser: false,
+      message: "나 잘거야",
+      feedbackMessage: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lorem erat, blandit eget venenatis in, venenatis a libero. Duis tristique cursus mauris sed varius. Suspendisse urna tellus, eleifend vel posuere semper, pulvinar vel dolor. Suspendisse venenatis est sem, at vehicula ipsum vestibulum "
+    }
+  ]
+
   window.addEventListener('load', function () {
     body.classList.add('is-loaded')
     addBottomCopy();
+    showChat(chats[0]);
   })
 
   const addBottomCopy = () => {
@@ -51,7 +90,7 @@
   }
 
   if (body.classList.contains('has-animations')) {
-    window.addEventListener('load', revealAnimations)
+    window.addEventListener('load', revealAnimations);
   }
 
   // Particle animation
@@ -200,50 +239,11 @@
   })()
 
   let isPhonePresenting = false;
-
-  const chats = [
-    {
-      isUser: true,
-      message: "프사는 왜 내렸어?"
-    },
-    {
-      isUser: true,
-      message: "상태명은 또 뭐야.."
-    },
-    {
-      isUser: true,
-      message: "헤어진 것처럼.."
-    },
-    {
-      isUser: false,
-      message: "없애든 말든 내 맘이지",
-    },
-    {
-      isUser: true,
-      message: "그렇게 꼭 싸운 티를 내야 돼?",
-    },
-    {
-      isUser: false,
-      message: "내 공간인데 내 맘대로 사용하지도 못함?",
-      feedbackMessage: "감정을 표현하는 방식이 다소 공격적이에요. 상대방과의 타협을 찾기가 갈수록 어려워집니다. 상대방에게는 자신의 마음을 고려하지 않고 자기중심적인 태도로 여겨질 수 있어요."
-    },
-    {
-      isUser: false,
-      message: "아됐어 그만 얘기해",
-      feedbackMessage: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lorem erat, blandit eget venenatis in, venenatis a libero. Duis tristique cursus mauris sed varius. Suspendisse urna tellus, eleifend vel posuere "
-    },
-    {
-      isUser: false,
-      message: "나 잘거야",
-      feedbackMessage: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lorem erat, blandit eget venenatis in, venenatis a libero. Duis tristique cursus mauris sed varius. Suspendisse urna tellus, eleifend vel posuere semper, pulvinar vel dolor. Suspendisse venenatis est sem, at vehicula ipsum vestibulum "
-    }
-  ]
-
   const firstScreen = document.getElementById("first_screen");
   const firstChat = firstScreen.getElementsByClassName("katalk-chat")[0];
-  let nextChatIndex = 0;
+  let nextChatIndex = 1;
   let isShowingChat = false;
-  const chatInterval = 1500;
+  const chatInterval = 800;
   let focusedChatIndex = null;
 
   function disableScroll() {
@@ -251,7 +251,6 @@
       return ;
     window.scrollTo({
       top: phonePosition, 
-      behavior: "smooth",
     });
   }
 
@@ -259,14 +258,11 @@
 
   window.onscroll = (() => {
     const wasPhonePresenting = isPhonePresenting;
-    isPhonePresenting = this.scrollY > 200 && this.scrollY < 1500;
+    isPhonePresenting = this.scrollY > 100;
     if (!wasPhonePresenting && isPhonePresenting && !isShowingChat) {
       var offsets = document.querySelector(".iphonex").getBoundingClientRect();
       phonePosition = window.scrollY + offsets.top;
       startShowChat(); 
-    }
-    else if (wasPhonePresenting) {
-      disableScroll();
     }
   })
 
@@ -279,7 +275,7 @@
       if (isShowingChat) {
         showChat(chats[nextChatIndex]);
         if (nextChatIndex == chats.length - 1) {
-          setTimeout(showRequestButton, 1500);
+          setTimeout(showRequestButton, 500);
           stopShowChat();
         }
         nextChatIndex += 1;
