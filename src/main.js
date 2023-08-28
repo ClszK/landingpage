@@ -37,7 +37,7 @@
     {
       isUser: false,
       message: "아됐어 그만 얘기해 나 잘거야",
-      feedbackMessage: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lorem erat, blandit eget venenatis in, venenatis a libero. Duis tristique cursus mauris sed varius. Suspendisse urna tellus, eleifend vel posuere "
+      feedbackMessage: "대화를 중단하고자 하면서 무관심한 태도를 보이고 있습니다. 타협점을 찾기 위해서는 대화를 이어가며 상호간의 의견을 조율하는 것이 필요합니다. 더 이해심 있게 표현하거나 상대방의 의견에 대해 존중하는 모습을 보여야 타협점을 찾을 수 있을 것입니다."
     },
   ]
 
