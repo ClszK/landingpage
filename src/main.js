@@ -27,7 +27,7 @@
     },
     {
       isUser: true,
-      message: "그렇게 꼭 싸운 티를 내야 돼?",
+      message: "꼭 싸운 티를 내야 돼?",
     },
     {
       isUser: false,
@@ -36,14 +36,9 @@
     },
     {
       isUser: false,
-      message: "아됐어 그만 얘기해",
+      message: "아됐어 그만 얘기해 나 잘거야",
       feedbackMessage: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lorem erat, blandit eget venenatis in, venenatis a libero. Duis tristique cursus mauris sed varius. Suspendisse urna tellus, eleifend vel posuere "
     },
-    {
-      isUser: false,
-      message: "나 잘거야",
-      feedbackMessage: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lorem erat, blandit eget venenatis in, venenatis a libero. Duis tristique cursus mauris sed varius. Suspendisse urna tellus, eleifend vel posuere semper, pulvinar vel dolor. Suspendisse venenatis est sem, at vehicula ipsum vestibulum "
-    }
   ]
 
   window.addEventListener('load', function () {
@@ -58,8 +53,10 @@
     view.className = "bottom-copy";
     const copies = [
     "말싸움에 대한",
-    "텍스트나 캡쳐화면을 공유해 주시면",
-    "빠르게 상황을 파악해서 분석해 드립니다"
+    "텍스트나 캡쳐화면을",
+    "공유해 주시면",
+    "빠르게 상황을 파악해서",
+    "분석해 드립니다"
     ];
     copies.forEach((c) => {
       const p = document.createElement("p");
@@ -359,7 +356,7 @@
 
   const changeFeedbackContent = (view, chat) => {
     const chatMessage = view.querySelector(".feedback-chat");
-    chatMessage.innerText = chat.message;
+    chatMessage.innerText = `"${chat.message}"`;
     const content = view.querySelector(".feedback-content");
     content.innerText = "";
   }
@@ -372,7 +369,7 @@
     title.innerText = "AI 분석 결과";
     const chatMessage = document.createElement("p");
     chatMessage.className = "feedback-chat";
-    chatMessage.innerText = `${chat.message}`;
+    chatMessage.innerText = `"${chat.message}"`;
     const content = document.createElement("p");
     content.className = "feedback-content";
     const nextButton = document.createElement("button");
