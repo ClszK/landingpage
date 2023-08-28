@@ -351,7 +351,7 @@ body{
   border-width: 10px 15px 10px 0;
   border-color: transparent #FFFFFF transparent transparent;
   position: relative;
-  right: 1em;
+  right: 0.8em;
 }
 
 .bubble.userchat::after {
@@ -360,7 +360,7 @@ body{
   border-width: 10px 0px 10px 15px;
   border-color: transparent transparent transparent #F9EB54;
   position: relative;
-  left: 1em;
+  left: 0.8em;
 }
 
 .request-button-container {
@@ -1001,7 +1001,7 @@ h4,h5,h6,.h4,.h5,.h6{
 }
 p{
   margin-top:0;
-  margin-bottom:0.2em;
+  margin-bottom:0em;
   font-size: 0.8em;  
 }
 dfn,cite,em,i{
