@@ -728,7 +728,7 @@ article,aside,footer,header,nav,section{
 }
 
 section {
-  height: 180vh;
+  height: 160vh;
   min-height: 1500px;
 }
 h1{
@@ -1625,7 +1625,8 @@ button,input,select,textarea,label{
   }
 
   section {
-    height: 180vh;
+    height: 160vh;
+    min-height: 2000px;
   }
 }
 .has-animations .hero .hero-bg,.has-animations .hero::before,.has-animations .hero::after,.has-animations .hero-particles-container,.has-animations .site-header,.has-animations .hero-title,.has-animations .hero-paragraph,.has-animations .hero-cta,.has-animations .hero .mockup-bg,.has-animations .hero .device-mockup{
