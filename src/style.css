@@ -1623,6 +1623,10 @@ button,input,select,textarea,label{
   .katalk-topbar {
     min-height: 140px;
   }
+
+  section {
+    height: 180vh;
+  }
 }
 .has-animations .hero .hero-bg,.has-animations .hero::before,.has-animations .hero::after,.has-animations .hero-particles-container,.has-animations .site-header,.has-animations .hero-title,.has-animations .hero-paragraph,.has-animations .hero-cta,.has-animations .hero .mockup-bg,.has-animations .hero .device-mockup{
   opacity:0
