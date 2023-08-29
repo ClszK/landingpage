@@ -351,7 +351,7 @@ body{
   border-width: 10px 15px 10px 0;
   border-color: transparent #FFFFFF transparent transparent;
   position: relative;
-  right: 1em;
+  right: 0.8em;
 }
 
 .bubble.userchat::after {
@@ -360,7 +360,7 @@ body{
   border-width: 10px 0px 10px 15px;
   border-color: transparent transparent transparent #F9EB54;
   position: relative;
-  left: 1em;
+  left: 0.8em;
 }
 
 .request-button-container {
@@ -728,7 +728,7 @@ article,aside,footer,header,nav,section{
 }
 
 section {
-  height: 180vh;
+  height: 160vh;
   min-height: 1500px;
 }
 h1{
@@ -1001,7 +1001,7 @@ h4,h5,h6,.h4,.h5,.h6{
 }
 p{
   margin-top:0;
-  margin-bottom:0.2em;
+  margin-bottom:0em;
   font-size: 0.8em;  
 }
 dfn,cite,em,i{
@@ -1585,7 +1585,7 @@ button,input,select,textarea,label{
 
   .bottom-copy {
     position: absolute;
-    right: -70%;
+    right: -80%;
     bottom: 0;
   }
 
@@ -1613,6 +1613,20 @@ button,input,select,textarea,label{
   }
   .next-feedback-button svg {
     display: block;
+  }
+  .bubble {
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    margin-top: 0.7em;
+    margin-bottom: 0.7em;
+  }
+  .katalk-topbar {
+    min-height: 140px;
+  }
+
+  section {
+    height: 160vh;
+    min-height: 2000px;
   }
 }
 .has-animations .hero .hero-bg,.has-animations .hero::before,.has-animations .hero::after,.has-animations .hero-particles-container,.has-animations .site-header,.has-animations .hero-title,.has-animations .hero-paragraph,.has-animations .hero-cta,.has-animations .hero .mockup-bg,.has-animations .hero .device-mockup{
